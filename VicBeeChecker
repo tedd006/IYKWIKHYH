@@ -1,5 +1,9 @@
 game:IsLoaded()
-print("Checking baka !")
+game.StarterGui:setCore("SendNotification", {
+        Title = "Vicious Bee Checker",
+        Text = "Checking!",
+        Duration = 5
+        })
 local function checkForViciousBee()
     for _, child in ipairs(game:GetService("Workspace").Monsters:GetChildren()) do
         if string.find(child.Name, "Vicious Bee") then
@@ -35,7 +39,7 @@ local function NotFound()
 end)
 
 if not checkForViciousBee() then
-    SendNotification()
+   NotFound()
 else
     sendNotif()
 end
