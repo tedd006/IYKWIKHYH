@@ -1,1 +1,41 @@
+game:IsLoaded()
+print("Checking baka !")
+local function checkForViciousBee()
+    for _, child in ipairs(game:GetService("Workspace").Monsters:GetChildren()) do
+        if string.find(child.Name, "Vicious Bee") then
+            if checkLevel(child.Name) then
+                Found = true
+                return true
+            end
+        end
+    end
+    return false
+end
+local function sendNotif()
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Vicious Bee Checker",
+        Text = "Vicious Bee Has Been Found!",
+        Duration = 30
+    })
+end
 
+local function NotFound()
+    game.StarterGui:setCore("SendNotification", {
+        Title = "Vicious Bee Checker",
+        Text = "Vicious Bee Has Not Been Found!",
+        Duration = 30
+        })
+    end
+    game:GetService("Workspace").Monsters.ChildAdded:Connect(function(child)
+    if string.find(child.Name, "Vicious Bee") then
+        if checkLevel(child.Name) then
+            Found = true
+        end
+    end
+end)
+
+if not checkForViciousBee() then
+    SendNotification()
+else
+    sendNotif()
+end
